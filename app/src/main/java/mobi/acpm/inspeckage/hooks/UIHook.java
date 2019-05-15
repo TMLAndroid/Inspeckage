@@ -19,6 +19,10 @@ public class UIHook extends XC_MethodHook {
 
     public static final String TAG = "Inspeckage_GUI:";
 
+    /**
+     * 为除了自己 所有的应用的Activity 和Fragment 注册自己的Broadcast
+     * @param loadPackageParam
+     */
     public static void initAllHooks(final XC_LoadPackage.LoadPackageParam loadPackageParam) {
 
         findAndHookMethod(Activity.class, "onCreate", Bundle.class, new XC_MethodHook() {

@@ -51,7 +51,7 @@ public class Module extends XC_MethodHook implements IXposedHookLoadPackage, IXp
     public static final String MY_PACKAGE_NAME = Module.class.getPackage().getName();
 
     public void initZygote(StartupParam startupParam) throws Throwable {
-        sPrefs = new XSharedPreferences(MY_PACKAGE_NAME, PREFS);
+        sPrefs = new XSharedPreferences(MY_PACKAGE_NAME, PREFS);//读取安装包下的SP xml文件
         sPrefs.makeWorldReadable();
     }
 

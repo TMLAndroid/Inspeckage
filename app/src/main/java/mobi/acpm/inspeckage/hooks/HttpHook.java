@@ -28,6 +28,7 @@ import static de.robv.android.xposed.XposedHelpers.getObjectField;
 
 /**
  * Created by acpm on 14/02/16.
+ * 处理http相关（Request response ssl）
  */
 public class HttpHook extends XC_MethodHook {
 
@@ -145,7 +146,7 @@ public class HttpHook extends XC_MethodHook {
 
 
         try {
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) { // 5.0及以下
                 findAndHookMethod("libcore.net.http.HttpURLConnectionImpl", loadPackageParam.classLoader, "getOutputStream", RequestHook);
             } else {
                 //com.squareup.okhttp.internal.http.HttpURLConnectionImpl
