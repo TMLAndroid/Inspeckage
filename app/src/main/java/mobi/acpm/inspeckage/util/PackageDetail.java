@@ -41,8 +41,10 @@ public class PackageDetail {
                         //gohorse to bypass "TransactionTooLargeExceptions"
                         mPInfo = pm.getPackageInfo(app, PackageManager.GET_META_DATA);
                         mPInfo.gids = pm.getPackageInfo(app, PackageManager.GET_GIDS).gids;
-                        mPInfo.activities = pm.getPackageInfo(app, PackageManager.GET_ACTIVITIES).activities;//0xFFFFFFFF);
-
+                        //mPInfo.activities = pm.getPackageInfo(app, PackageManager.GET_ACTIVITIES).activities;//0xFFFFFFFF);
+                        // 在某些手机（比如QiKu会出现）hook微信由于binder传递数据的限制，会报  java.lang.RuntimeException: Package manager has diedjava.lang.RuntimeException: Package manager has died
+                        // Binder 是使用匿名共享内存实现的， 系统的Binder驱动为每一个进程只分配了4M大小内存缓冲区。 而上层只给每个Binder限制了8k~1M的大小
+                        //遇到这种情况 ，可以先不看Activity
                         mPInfo.providers = pm.getPackageInfo(app, PackageManager.GET_PROVIDERS).providers;
                         mPInfo.receivers = pm.getPackageInfo(app, PackageManager.GET_RECEIVERS).receivers;
                         mPInfo.services = pm.getPackageInfo(app, PackageManager.GET_SERVICES).services;
